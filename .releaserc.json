@@ -1,0 +1,22 @@
+{
+    "branches": ["master", "ci"],
+    "repositoryUrl": "https://gitlab.com/Hugo-osorio/npm-publish-demo.git",
+    "ci": true,
+    "plugins": [
+      ["@semantic-release/commit-analyzer", {
+          "preset": "angular",
+          "releaseRules": [
+            {"type": "Bugfix", "release": "patch"},
+            {"type": "Feature", "release": "minor"},
+            {"type": "Major", "release": "major"},
+            {"type": "Refactor", "release": false}
+          ]
+      }],
+      "@semantic-release/release-notes-generator",
+      "@semantic-release/npm",
+      ["@semantic-release/git", {
+        "assets": ["package.json"],
+        "message": "Version: ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
+      }]
+    ]
+}
